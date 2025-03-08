@@ -30,3 +30,10 @@
 .\objects\control.o: .\Library\stm32f10x_wwdg.h
 .\objects\control.o: .\Library\misc.h
 .\objects\control.o: .\MPU6050\inv_mpu.h
+.\objects\control.o: System\Sys_Init.h
+.\objects\control.o: .\Mylibrary\OLED.h
+.\objects\control.o: .\MPU6050\MPU6050.h
+.\objects\control.o: .\MPU6050\inv_mpu.h
+.\objects\control.o: System\exti.h
+.\objects\control.o: System\Delay.h
+.\objects\control.o: .\HardWare\Encoder.h

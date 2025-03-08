@@ -34,3 +34,4 @@
 .\objects\sys_init.o: .\MPU6050\inv_mpu.h
 .\objects\sys_init.o: System\exti.h
 .\objects\sys_init.o: System\Delay.h
+.\objects\sys_init.o: .\HardWare\Encoder.h

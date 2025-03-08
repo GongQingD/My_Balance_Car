@@ -7,6 +7,9 @@
 #include "inv_mpu.h"
 #include "exti.h"
 #include "Delay.h"
+#include "Encoder.h"
+
+extern int16_t L_encoder, R_encoder;
 
 void MySys_Init(void);
 

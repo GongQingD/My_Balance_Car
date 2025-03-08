@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\Project.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\Project.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Sat Mar 08 14:28:02 2025
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Sat Mar 08 15:11:49 2025
 <BR><P>
 <H3>Maximum Stack Usage =        312 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -212,7 +212,7 @@ Global Symbols
 
 <P><STRONG><a name="[55]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
 <BR><BR>[Stack]<UL><LI>Max Depth = 280 + Unknown Stack Size
-<LI>Call Chain = __rt_entry_main &rArr; main &rArr; MySys_Init &rArr; MPU6050_DMP_Init &rArr; run_self_test &rArr; mpu_run_self_test &rArr; mpu_set_dmp_state &rArr; mpu_set_sample_rate &rArr; mpu_lp_accel_mode &rArr; mpu_configure_fifo &rArr; set_int_enable &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<LI>Call Chain = __rt_entry_main &rArr; main &rArr; MySys_Init &rArr; MPU6050_DMP_Init &rArr; run_self_test &rArr; mpu_run_self_test &rArr; mpu_set_dmp_state &rArr; mpu_set_sample_rate &rArr; mpu_lp_accel_mode &rArr; mpu_configure_fifo &rArr; set_int_enable &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
@@ -561,16 +561,18 @@ Global Symbols
 <LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Delay_ms
 </UL>
 
-<P><STRONG><a name="[25]"></a>EXTI9_5_IRQHandler</STRONG> (Thumb, 48 bytes, Stack size 8 bytes, control.o(i.EXTI9_5_IRQHandler))
+<P><STRONG><a name="[25]"></a>EXTI9_5_IRQHandler</STRONG> (Thumb, 64 bytes, Stack size 8 bytes, control.o(i.EXTI9_5_IRQHandler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 312<LI>Call Chain = EXTI9_5_IRQHandler &rArr; MPU6050_DMP_Get_Data &rArr; dmp_read_fifo &rArr; mpu_read_fifo_stream &rArr; mpu6050_read &rArr; MyI2C_ReceiveByte &rArr; MyI2C_SendAck &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EXTI_GetITStatus
-<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EXTI_ClearITPendingBit
+<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EXTI_ClearITPendingBit
 <LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU6050_DMP_Get_Data
+<LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Encoder_Get4
+<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Encoder_Get2
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f10x_hd.o(RESET)
 </UL>
-<P><STRONG><a name="[6c]"></a>EXTI_ClearITPendingBit</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f10x_exti.o(i.EXTI_ClearITPendingBit))
+<P><STRONG><a name="[6e]"></a>EXTI_ClearITPendingBit</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f10x_exti.o(i.EXTI_ClearITPendingBit))
 <BR><BR>[Called By]<UL><LI><a href="#[25]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EXTI9_5_IRQHandler
 </UL>
 
@@ -582,22 +584,22 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU6050_EXTI_Init
 </UL>
 
-<P><STRONG><a name="[6d]"></a>Encoder_Get2</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, encoder.o(i.Encoder_Get2))
+<P><STRONG><a name="[6c]"></a>Encoder_Get2</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, encoder.o(i.Encoder_Get2))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = Encoder_Get2
 </UL>
-<BR>[Calls]<UL><LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_SetCounter
-<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_GetCounter
+<BR>[Calls]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_SetCounter
+<LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_GetCounter
 </UL>
-<BR>[Called By]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<BR>[Called By]<UL><LI><a href="#[25]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EXTI9_5_IRQHandler
 </UL>
 
-<P><STRONG><a name="[70]"></a>Encoder_Get4</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, encoder.o(i.Encoder_Get4))
+<P><STRONG><a name="[6d]"></a>Encoder_Get4</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, encoder.o(i.Encoder_Get4))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = Encoder_Get4
 </UL>
-<BR>[Calls]<UL><LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_SetCounter
-<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_GetCounter
+<BR>[Calls]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_SetCounter
+<LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_GetCounter
 </UL>
-<BR>[Called By]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<BR>[Called By]<UL><LI><a href="#[25]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EXTI9_5_IRQHandler
 </UL>
 
 <P><STRONG><a name="[8c]"></a>GPIO_EXTILineConfig</STRONG> (Thumb, 60 bytes, Stack size 12 bytes, stm32f10x_gpio.o(i.GPIO_EXTILineConfig))
@@ -660,7 +662,7 @@ Global Symbols
 
 <P><STRONG><a name="[7c]"></a>MPU6050_DMP_Init</STRONG> (Thumb, 74 bytes, Stack size 8 bytes, inv_mpu.o(i.MPU6050_DMP_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 272 + Unknown Stack Size
-<LI>Call Chain = MPU6050_DMP_Init &rArr; run_self_test &rArr; mpu_run_self_test &rArr; mpu_set_dmp_state &rArr; mpu_set_sample_rate &rArr; mpu_lp_accel_mode &rArr; mpu_configure_fifo &rArr; set_int_enable &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<LI>Call Chain = MPU6050_DMP_Init &rArr; run_self_test &rArr; mpu_run_self_test &rArr; mpu_set_dmp_state &rArr; mpu_set_sample_rate &rArr; mpu_lp_accel_mode &rArr; mpu_configure_fifo &rArr; set_int_enable &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dmp_set_orientation
 <LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dmp_set_fifo_rate
@@ -692,7 +694,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[90]"></a>MPU6050_Init</STRONG> (Thumb, 112 bytes, Stack size 8 bytes, mpu6050.o(i.MPU6050_Init))
-<BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = MPU6050_Init &rArr; MPU_Set_Rate &rArr; MPU_Set_LPF &rArr; MPU6050_WriteReg &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = MPU6050_Init &rArr; MPU_Set_Rate &rArr; MPU_Set_LPF &rArr; MPU6050_WriteReg &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Set_Rate
 <LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Set_Gyro_Fsr
@@ -705,12 +707,12 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[91]"></a>MPU6050_WriteReg</STRONG> (Thumb, 68 bytes, Stack size 16 bytes, mpu6050.o(i.MPU6050_WriteReg))
-<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = MPU6050_WriteReg &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = MPU6050_WriteReg &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
-<BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_ReceiveAck
-<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_Stop
+<BR>[Calls]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_Stop
 <LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_Start
 <LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_SendByte
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_ReceiveAck
 </UL>
 <BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Set_Rate
 <LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Set_LPF
@@ -720,7 +722,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[93]"></a>MPU_Set_Accel_Fsr</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, mpu6050.o(i.MPU_Set_Accel_Fsr))
-<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = MPU_Set_Accel_Fsr &rArr; MPU6050_WriteReg &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = MPU_Set_Accel_Fsr &rArr; MPU6050_WriteReg &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU6050_WriteReg
 </UL>
@@ -728,7 +730,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[92]"></a>MPU_Set_Gyro_Fsr</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, mpu6050.o(i.MPU_Set_Gyro_Fsr))
-<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = MPU_Set_Gyro_Fsr &rArr; MPU6050_WriteReg &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = MPU_Set_Gyro_Fsr &rArr; MPU6050_WriteReg &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU6050_WriteReg
 </UL>
@@ -736,7 +738,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[99]"></a>MPU_Set_LPF</STRONG> (Thumb, 58 bytes, Stack size 16 bytes, mpu6050.o(i.MPU_Set_LPF))
-<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = MPU_Set_LPF &rArr; MPU6050_WriteReg &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = MPU_Set_LPF &rArr; MPU6050_WriteReg &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU6050_WriteReg
 </UL>
@@ -744,7 +746,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[94]"></a>MPU_Set_Rate</STRONG> (Thumb, 58 bytes, Stack size 16 bytes, mpu6050.o(i.MPU_Set_Rate))
-<BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = MPU_Set_Rate &rArr; MPU_Set_LPF &rArr; MPU6050_WriteReg &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = MPU_Set_Rate &rArr; MPU_Set_LPF &rArr; MPU6050_WriteReg &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Set_LPF
 <LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU6050_WriteReg
@@ -837,10 +839,10 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_W_SDA
 <LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_W_SCL
 </UL>
-<BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_ReceiveAck
-<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU6050_WriteReg
+<BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU6050_WriteReg
 <LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu6050_write
 <LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu6050_read
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_ReceiveAck
 </UL>
 
 <P><STRONG><a name="[9f]"></a>MyI2C_W_SCL</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, myi2c.o(i.MyI2C_W_SCL))
@@ -849,12 +851,12 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_WriteBit
 <LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Delay_us
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_ReceiveByte
-<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_ReceiveAck
-<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_SendAck
+<BR>[Called By]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_SendAck
 <LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_Stop
 <LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_Start
 <LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_SendByte
+<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_ReceiveByte
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_ReceiveAck
 </UL>
 
 <P><STRONG><a name="[9e]"></a>MyI2C_W_SDA</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, myi2c.o(i.MyI2C_W_SDA))
@@ -863,17 +865,17 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_WriteBit
 <LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Delay_us
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_ReceiveByte
-<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_ReceiveAck
-<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_SendAck
+<BR>[Called By]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_SendAck
 <LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_Stop
 <LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_Start
 <LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_SendByte
+<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_ReceiveByte
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_ReceiveAck
 </UL>
 
 <P><STRONG><a name="[a3]"></a>MySys_Init</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, sys_init.o(i.MySys_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 280 + Unknown Stack Size
-<LI>Call Chain = MySys_Init &rArr; MPU6050_DMP_Init &rArr; run_self_test &rArr; mpu_run_self_test &rArr; mpu_set_dmp_state &rArr; mpu_set_sample_rate &rArr; mpu_lp_accel_mode &rArr; mpu_configure_fifo &rArr; set_int_enable &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<LI>Call Chain = MySys_Init &rArr; MPU6050_DMP_Init &rArr; run_self_test &rArr; mpu_run_self_test &rArr; mpu_set_dmp_state &rArr; mpu_set_sample_rate &rArr; mpu_lp_accel_mode &rArr; mpu_configure_fifo &rArr; set_int_enable &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OLED_Init
 <LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OLED_Clear
@@ -1042,14 +1044,14 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f10x_hd.o(.text)
 </UL>
-<P><STRONG><a name="[6e]"></a>TIM_GetCounter</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f10x_tim.o(i.TIM_GetCounter))
-<BR><BR>[Called By]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Encoder_Get4
-<LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Encoder_Get2
+<P><STRONG><a name="[6f]"></a>TIM_GetCounter</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f10x_tim.o(i.TIM_GetCounter))
+<BR><BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Encoder_Get4
+<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Encoder_Get2
 </UL>
 
-<P><STRONG><a name="[6f]"></a>TIM_SetCounter</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f10x_tim.o(i.TIM_SetCounter))
-<BR><BR>[Called By]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Encoder_Get4
-<LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Encoder_Get2
+<P><STRONG><a name="[70]"></a>TIM_SetCounter</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f10x_tim.o(i.TIM_SetCounter))
+<BR><BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Encoder_Get4
+<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Encoder_Get2
 </UL>
 
 <P><STRONG><a name="[9]"></a>UsageFault_Handler</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f10x_it.o(i.UsageFault_Handler))
@@ -1151,7 +1153,7 @@ Global Symbols
 
 <P><STRONG><a name="[c5]"></a>dmp_enable_6x_lp_quat</STRONG> (Thumb, 60 bytes, Stack size 16 bytes, inv_mpu_dmp_motion_driver.o(i.dmp_enable_6x_lp_quat))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88 + Unknown Stack Size
-<LI>Call Chain = dmp_enable_6x_lp_quat &rArr; mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<LI>Call Chain = dmp_enable_6x_lp_quat &rArr; mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_write_mem
 <LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_reset_fifo
@@ -1162,7 +1164,7 @@ Global Symbols
 
 <P><STRONG><a name="[85]"></a>dmp_enable_feature</STRONG> (Thumb, 530 bytes, Stack size 24 bytes, inv_mpu_dmp_motion_driver.o(i.dmp_enable_feature))
 <BR><BR>[Stack]<UL><LI>Max Depth = 136 + Unknown Stack Size
-<LI>Call Chain = dmp_enable_feature &rArr; dmp_set_tap_thresh &rArr; mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<LI>Call Chain = dmp_enable_feature &rArr; dmp_set_tap_thresh &rArr; mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dmp_set_tap_time_multi
 <LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dmp_set_tap_time
@@ -1182,7 +1184,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[c8]"></a>dmp_enable_gyro_cal</STRONG> (Thumb, 62 bytes, Stack size 24 bytes, inv_mpu_dmp_motion_driver.o(i.dmp_enable_gyro_cal))
-<BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = dmp_enable_gyro_cal &rArr; mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = dmp_enable_gyro_cal &rArr; mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_write_mem
 </UL>
@@ -1191,7 +1193,7 @@ Global Symbols
 
 <P><STRONG><a name="[d1]"></a>dmp_enable_lp_quat</STRONG> (Thumb, 60 bytes, Stack size 16 bytes, inv_mpu_dmp_motion_driver.o(i.dmp_enable_lp_quat))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88 + Unknown Stack Size
-<LI>Call Chain = dmp_enable_lp_quat &rArr; mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<LI>Call Chain = dmp_enable_lp_quat &rArr; mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_write_mem
 <LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_reset_fifo
@@ -1219,7 +1221,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[d5]"></a>dmp_set_accel_bias</STRONG> (Thumb, 300 bytes, Stack size 48 bytes, inv_mpu_dmp_motion_driver.o(i.dmp_set_accel_bias))
-<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = dmp_set_accel_bias &rArr; mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = dmp_set_accel_bias &rArr; mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_write_mem
 <LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_get_accel_sens
@@ -1228,7 +1230,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[86]"></a>dmp_set_fifo_rate</STRONG> (Thumb, 96 bytes, Stack size 32 bytes, inv_mpu_dmp_motion_driver.o(i.dmp_set_fifo_rate))
-<BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = dmp_set_fifo_rate &rArr; mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = dmp_set_fifo_rate &rArr; mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_write_mem
 </UL>
@@ -1236,7 +1238,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[d7]"></a>dmp_set_gyro_bias</STRONG> (Thumb, 294 bytes, Stack size 24 bytes, inv_mpu_dmp_motion_driver.o(i.dmp_set_gyro_bias))
-<BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = dmp_set_gyro_bias &rArr; mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = dmp_set_gyro_bias &rArr; mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_write_mem
 </UL>
@@ -1244,7 +1246,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[84]"></a>dmp_set_orientation</STRONG> (Thumb, 290 bytes, Stack size 32 bytes, inv_mpu_dmp_motion_driver.o(i.dmp_set_orientation))
-<BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = dmp_set_orientation &rArr; mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = dmp_set_orientation &rArr; mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_write_mem
 </UL>
@@ -1252,7 +1254,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[ce]"></a>dmp_set_shake_reject_thresh</STRONG> (Thumb, 56 bytes, Stack size 24 bytes, inv_mpu_dmp_motion_driver.o(i.dmp_set_shake_reject_thresh))
-<BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = dmp_set_shake_reject_thresh &rArr; mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = dmp_set_shake_reject_thresh &rArr; mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_write_mem
 </UL>
@@ -1260,7 +1262,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[cf]"></a>dmp_set_shake_reject_time</STRONG> (Thumb, 38 bytes, Stack size 16 bytes, inv_mpu_dmp_motion_driver.o(i.dmp_set_shake_reject_time))
-<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = dmp_set_shake_reject_time &rArr; mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = dmp_set_shake_reject_time &rArr; mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_write_mem
 </UL>
@@ -1268,7 +1270,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[d0]"></a>dmp_set_shake_reject_timeout</STRONG> (Thumb, 38 bytes, Stack size 16 bytes, inv_mpu_dmp_motion_driver.o(i.dmp_set_shake_reject_timeout))
-<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = dmp_set_shake_reject_timeout &rArr; mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = dmp_set_shake_reject_timeout &rArr; mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_write_mem
 </UL>
@@ -1276,7 +1278,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[ca]"></a>dmp_set_tap_axes</STRONG> (Thumb, 70 bytes, Stack size 16 bytes, inv_mpu_dmp_motion_driver.o(i.dmp_set_tap_axes))
-<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = dmp_set_tap_axes &rArr; mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = dmp_set_tap_axes &rArr; mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_write_mem
 </UL>
@@ -1284,7 +1286,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[cb]"></a>dmp_set_tap_count</STRONG> (Thumb, 38 bytes, Stack size 16 bytes, inv_mpu_dmp_motion_driver.o(i.dmp_set_tap_count))
-<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = dmp_set_tap_count &rArr; mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = dmp_set_tap_count &rArr; mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_write_mem
 </UL>
@@ -1292,7 +1294,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[c9]"></a>dmp_set_tap_thresh</STRONG> (Thumb, 396 bytes, Stack size 40 bytes, inv_mpu_dmp_motion_driver.o(i.dmp_set_tap_thresh))
-<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = dmp_set_tap_thresh &rArr; mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = dmp_set_tap_thresh &rArr; mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_write_mem
 <LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_get_accel_fsr
@@ -1305,7 +1307,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[cc]"></a>dmp_set_tap_time</STRONG> (Thumb, 38 bytes, Stack size 16 bytes, inv_mpu_dmp_motion_driver.o(i.dmp_set_tap_time))
-<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = dmp_set_tap_time &rArr; mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = dmp_set_tap_time &rArr; mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_write_mem
 </UL>
@@ -1313,7 +1315,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[cd]"></a>dmp_set_tap_time_multi</STRONG> (Thumb, 38 bytes, Stack size 16 bytes, inv_mpu_dmp_motion_driver.o(i.dmp_set_tap_time_multi))
-<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = dmp_set_tap_time_multi &rArr; mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = dmp_set_tap_time_multi &rArr; mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_write_mem
 </UL>
@@ -1332,16 +1334,14 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;inv_orientation_matrix_to_scalar
 </UL>
 
-<P><STRONG><a name="[56]"></a>main</STRONG> (Thumb, 122 bytes, Stack size 0 bytes, main.o(i.main))
+<P><STRONG><a name="[56]"></a>main</STRONG> (Thumb, 138 bytes, Stack size 0 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 280 + Unknown Stack Size
-<LI>Call Chain = main &rArr; MySys_Init &rArr; MPU6050_DMP_Init &rArr; run_self_test &rArr; mpu_run_self_test &rArr; mpu_set_dmp_state &rArr; mpu_set_sample_rate &rArr; mpu_lp_accel_mode &rArr; mpu_configure_fifo &rArr; set_int_enable &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<LI>Call Chain = main &rArr; MySys_Init &rArr; MPU6050_DMP_Init &rArr; run_self_test &rArr; mpu_run_self_test &rArr; mpu_set_dmp_state &rArr; mpu_set_sample_rate &rArr; mpu_lp_accel_mode &rArr; mpu_configure_fifo &rArr; set_int_enable &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OLED_ShowSignedNum
 <LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OLED_ShowNum
-<LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Encoder_Get4
-<LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Encoder_Get2
-<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2iz
 <LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MySys_Init
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2iz
 </UL>
 <BR>[Called By]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
@@ -1349,11 +1349,11 @@ Global Symbols
 <P><STRONG><a name="[db]"></a>mpu6050_read</STRONG> (Thumb, 110 bytes, Stack size 24 bytes, mpu6050.o(i.mpu6050_read))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = mpu6050_read &rArr; MyI2C_ReceiveByte &rArr; MyI2C_SendAck &rArr; MyI2C_W_SDA
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_ReceiveByte
-<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_ReceiveAck
-<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_Stop
+<BR>[Calls]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_Stop
 <LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_Start
 <LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_SendByte
+<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_ReceiveByte
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_ReceiveAck
 </UL>
 <BR>[Called By]<UL><LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_set_bypass
 <LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_read_mem
@@ -1365,12 +1365,12 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[dd]"></a>mpu6050_write</STRONG> (Thumb, 82 bytes, Stack size 24 bytes, mpu6050.o(i.mpu6050_write))
-<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
-<BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_ReceiveAck
-<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_Stop
+<BR>[Calls]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_Stop
 <LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_Start
 <LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_SendByte
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MyI2C_ReceiveAck
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_write_mem
 <LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_set_sensors
@@ -1391,7 +1391,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[80]"></a>mpu_configure_fifo</STRONG> (Thumb, 106 bytes, Stack size 16 bytes, inv_mpu.o(i.mpu_configure_fifo))
-<BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = mpu_configure_fifo &rArr; set_int_enable &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = mpu_configure_fifo &rArr; set_int_enable &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_reset_fifo
 <LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_int_enable
@@ -1433,7 +1433,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[7e]"></a>mpu_init</STRONG> (Thumb, 396 bytes, Stack size 16 bytes, inv_mpu.o(i.mpu_init))
-<BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = mpu_init &rArr; mpu_set_sample_rate &rArr; mpu_lp_accel_mode &rArr; mpu_configure_fifo &rArr; set_int_enable &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = mpu_init &rArr; mpu_set_sample_rate &rArr; mpu_lp_accel_mode &rArr; mpu_configure_fifo &rArr; set_int_enable &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu6050_write
 <LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu6050_read
@@ -1461,7 +1461,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[e9]"></a>mpu_lp_accel_mode</STRONG> (Thumb, 218 bytes, Stack size 16 bytes, inv_mpu.o(i.mpu_lp_accel_mode))
-<BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = mpu_lp_accel_mode &rArr; mpu_configure_fifo &rArr; set_int_enable &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = mpu_lp_accel_mode &rArr; mpu_configure_fifo &rArr; set_int_enable &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu6050_write
 <LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_set_lpf
@@ -1490,7 +1490,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[c7]"></a>mpu_reset_fifo</STRONG> (Thumb, 450 bytes, Stack size 8 bytes, inv_mpu.o(i.mpu_reset_fifo))
-<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = mpu_reset_fifo &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = mpu_reset_fifo &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu6050_write
 <LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Delay_ms
@@ -1505,7 +1505,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[eb]"></a>mpu_run_self_test</STRONG> (Thumb, 278 bytes, Stack size 88 bytes, inv_mpu.o(i.mpu_run_self_test))
-<BR><BR>[Stack]<UL><LI>Max Depth = 216<LI>Call Chain = mpu_run_self_test &rArr; mpu_set_dmp_state &rArr; mpu_set_sample_rate &rArr; mpu_lp_accel_mode &rArr; mpu_configure_fifo &rArr; set_int_enable &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 216<LI>Call Chain = mpu_run_self_test &rArr; mpu_set_dmp_state &rArr; mpu_set_sample_rate &rArr; mpu_lp_accel_mode &rArr; mpu_configure_fifo &rArr; set_int_enable &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_set_sensors
 <LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_set_sample_rate
@@ -1527,7 +1527,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[e4]"></a>mpu_set_accel_fsr</STRONG> (Thumb, 126 bytes, Stack size 16 bytes, inv_mpu.o(i.mpu_set_accel_fsr))
-<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = mpu_set_accel_fsr &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = mpu_set_accel_fsr &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu6050_write
 </UL>
@@ -1547,7 +1547,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[88]"></a>mpu_set_dmp_state</STRONG> (Thumb, 138 bytes, Stack size 16 bytes, inv_mpu.o(i.mpu_set_dmp_state))
-<BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = mpu_set_dmp_state &rArr; mpu_set_sample_rate &rArr; mpu_lp_accel_mode &rArr; mpu_configure_fifo &rArr; set_int_enable &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = mpu_set_dmp_state &rArr; mpu_set_sample_rate &rArr; mpu_lp_accel_mode &rArr; mpu_configure_fifo &rArr; set_int_enable &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu6050_write
 <LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_set_sample_rate
@@ -1560,7 +1560,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[e3]"></a>mpu_set_gyro_fsr</STRONG> (Thumb, 132 bytes, Stack size 16 bytes, inv_mpu.o(i.mpu_set_gyro_fsr))
-<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = mpu_set_gyro_fsr &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = mpu_set_gyro_fsr &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu6050_write
 </UL>
@@ -1569,7 +1569,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[ea]"></a>mpu_set_int_latched</STRONG> (Thumb, 102 bytes, Stack size 16 bytes, inv_mpu.o(i.mpu_set_int_latched))
-<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = mpu_set_int_latched &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = mpu_set_int_latched &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu6050_write
 </UL>
@@ -1578,7 +1578,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[e5]"></a>mpu_set_lpf</STRONG> (Thumb, 126 bytes, Stack size 16 bytes, inv_mpu.o(i.mpu_set_lpf))
-<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = mpu_set_lpf &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = mpu_set_lpf &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu6050_write
 </UL>
@@ -1589,7 +1589,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[81]"></a>mpu_set_sample_rate</STRONG> (Thumb, 152 bytes, Stack size 16 bytes, inv_mpu.o(i.mpu_set_sample_rate))
-<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = mpu_set_sample_rate &rArr; mpu_lp_accel_mode &rArr; mpu_configure_fifo &rArr; set_int_enable &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = mpu_set_sample_rate &rArr; mpu_lp_accel_mode &rArr; mpu_configure_fifo &rArr; set_int_enable &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu6050_write
 <LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_set_lpf
@@ -1602,7 +1602,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[7f]"></a>mpu_set_sensors</STRONG> (Thumb, 202 bytes, Stack size 16 bytes, inv_mpu.o(i.mpu_set_sensors))
-<BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = mpu_set_sensors &rArr; mpu_set_int_latched &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = mpu_set_sensors &rArr; mpu_set_int_latched &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu6050_write
 <LI><a href="#[ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_set_int_latched
@@ -1614,7 +1614,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[c6]"></a>mpu_write_mem</STRONG> (Thumb, 122 bytes, Stack size 24 bytes, inv_mpu.o(i.mpu_write_mem))
-<BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = mpu_write_mem &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu6050_write
 </UL>
@@ -1638,7 +1638,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[87]"></a>run_self_test</STRONG> (Thumb, 148 bytes, Stack size 48 bytes, inv_mpu.o(i.run_self_test))
-<BR><BR>[Stack]<UL><LI>Max Depth = 264<LI>Call Chain = run_self_test &rArr; mpu_run_self_test &rArr; mpu_set_dmp_state &rArr; mpu_set_sample_rate &rArr; mpu_lp_accel_mode &rArr; mpu_configure_fifo &rArr; set_int_enable &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 264<LI>Call Chain = run_self_test &rArr; mpu_run_self_test &rArr; mpu_set_dmp_state &rArr; mpu_set_sample_rate &rArr; mpu_lp_accel_mode &rArr; mpu_configure_fifo &rArr; set_int_enable &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dmp_set_gyro_bias
 <LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dmp_set_accel_bias
@@ -2021,7 +2021,7 @@ Local Symbols
 </UL>
 
 <P><STRONG><a name="[e2]"></a>set_int_enable</STRONG> (Thumb, 138 bytes, Stack size 16 bytes, inv_mpu.o(i.set_int_enable))
-<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = set_int_enable &rArr; mpu6050_write &rArr; MyI2C_ReceiveAck &rArr; MyI2C_Stop &rArr; MyI2C_W_SDA
+<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = set_int_enable &rArr; mpu6050_write &rArr; MyI2C_SendByte &rArr; MyI2C_W_SDA
 </UL>
 <BR>[Calls]<UL><LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu6050_write
 </UL>
