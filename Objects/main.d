@@ -35,5 +35,7 @@
 .\objects\main.o: .\System\exti.h
 .\objects\main.o: .\System\Delay.h
 .\objects\main.o: .\HardWare\Encoder.h
+.\objects\main.o: .\HardWare\PWM.h
+.\objects\main.o: .\HardWare\Motor.h
 .\objects\main.o: .\System\Control.h
 .\objects\main.o: .\MPU6050\inv_mpu.h

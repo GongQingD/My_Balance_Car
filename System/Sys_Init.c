@@ -14,6 +14,8 @@ void MySys_Init(void)
 	MPU6050_EXTI_Init();
 	
 	Encoder_Init();
+	PWM_Init();
+	Motor_Init();
 	
 	
 }

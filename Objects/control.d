@@ -37,3 +37,5 @@
 .\objects\control.o: System\exti.h
 .\objects\control.o: System\Delay.h
 .\objects\control.o: .\HardWare\Encoder.h
+.\objects\control.o: .\HardWare\PWM.h
+.\objects\control.o: .\HardWare\Motor.h

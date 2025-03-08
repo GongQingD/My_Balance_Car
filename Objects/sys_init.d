@@ -35,3 +35,5 @@
 .\objects\sys_init.o: System\exti.h
 .\objects\sys_init.o: System\Delay.h
 .\objects\sys_init.o: .\HardWare\Encoder.h
+.\objects\sys_init.o: .\HardWare\PWM.h
+.\objects\sys_init.o: .\HardWare\Motor.h

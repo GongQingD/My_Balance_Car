@@ -8,8 +8,9 @@
 #include "exti.h"
 #include "Delay.h"
 #include "Encoder.h"
-
-extern int16_t L_encoder, R_encoder;
+#include "PWM.h"
+#include "Motor.h"
+extern int16_t L_encoder, R_encoder, Motor_PWM_out_Left, Motor_PWM_out_Right;
 
 void MySys_Init(void);
 
