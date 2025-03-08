@@ -13,4 +13,7 @@ void MySys_Init(void)
 	MPU6050_DMP_Init();
 	MPU6050_EXTI_Init();
 	
+	Encoder_Init();
+	
+	
 }
