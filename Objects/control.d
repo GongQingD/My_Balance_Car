@@ -39,3 +39,5 @@
 .\objects\control.o: .\HardWare\Encoder.h
 .\objects\control.o: .\HardWare\PWM.h
 .\objects\control.o: .\HardWare\Motor.h
+.\objects\control.o: System\Serial.h
+.\objects\control.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

@@ -2,95 +2,88 @@
 #include "Sys_Init.h"
 float pitc=0, rol=0, ya=0;
 int8_t B=0, sum_test = 0;
-int16_t Motor_Encoder_Left, Motor_Encoder_Right;
+int16_t Motor_Encoder_Left, Motor_Encoder_Right, Motor_PWM_out_Left, Motor_PWM_out_Right;
 int16_t AccX, AccY, AccZ, GyroX, GyroY, GyroZ;//MPU6050的加速度和角加速度
+int16_t Vertical_Error = 0;
 /***********************///需要设置的值
 struct PID_param {
-	int8_t Velocity_Kp;//速度环p
-	int8_t Velocity_Ki;//速度环i
-	int8_t Vertical_Kp;//直立环p
-	int8_t Vertical_Kd;//直立环d
-	int8_t Turn_Kp;    //转向环p
+	float Velocity_Kp;//速度环p
+	float Velocity_Ki;//速度环i
+	float Vertical_Kp;//直立环p
+	float Vertical_Kd;//直立环d
+	float Turn_Kp;    //转向环p
 }PID_Parameter;
 /***********************///需要设置的值
-struct PID_param PID_Parameter = {1, 1, 1, 1, 1};//定义PID的参数
-int8_t Car_Median = 0;//小车的机械中值，小车平衡时的pitch
+struct PID_param PID_Parameter = {-400, -1.92, 35, 0, 0.6};//定义PID的参数
+int8_t Car_Median = 0;//小车的机械中值，小车平衡时的roll
 
 
-/**
-  * 函    数：速度环PID
-  * 参    数：Target：Motor_Encoder_Left（左电机编码器值），Motor_Encoder_Right（右电机编码器值）
-  * 返 回 值：小车的期望角度（直立环的输入）
-  */
-int16_t Velocity(int16_t Motor_Encoder_Left, int16_t Motor_Encoder_Right)
-{
-	int16_t PWM_Out, Motor_Encoder_Err, Motor_Encoder_Lowout;
-	static int16_t Motor_Encoder_S, Motor_EnC_Err_Lowout_last;//Encoder_S积分累积值，需要持续保存，EnC_Err_Lowout_last低通滤波公式要用到
-	float a = 0.7; //低通滤波系数
-	
-	// 1.计算速度偏差
-	Motor_Encoder_Err = (Motor_Encoder_Left + Motor_Encoder_Right) - 0;//直立时的速度为0，因此期望速度是0
-	// 2.对速度偏差进行低通滤波
-	Motor_Encoder_Lowout = (1 - a) * Motor_Encoder_Err + a * Motor_EnC_Err_Lowout_last; // 使得波形更加平滑，滤除高频干扰，放置速度突变
-    Motor_EnC_Err_Lowout_last = Motor_Encoder_Lowout;   // 防止速度过大影响直立环的正常工作
-	// 3.对速度偏差积分
-	Motor_Encoder_S += Motor_Encoder_Lowout;
-	// 4.积分限幅
-	Motor_Encoder_S = 
-			Motor_Encoder_S > 10000 ? 10000:			// 如果值 > 10000，设为10000
-			(Motor_Encoder_S < (-10000) ? (-10000):		// 如果值 < -10000，设为-10000
-			Motor_Encoder_S);							// 否则保持原值
-	 // 5.速度环控制输出
-	PWM_Out = PID_Parameter.Velocity_Kp * Motor_Encoder_Lowout+PID_Parameter.Velocity_Ki * Motor_Encoder_S;	
-	
-	return PWM_Out;
-}
+///**
+//  * 函    数：速度环PID
+//  * 参    数：Target：Motor_Encoder_Left（左电机编码器值），Motor_Encoder_Right（右电机编码器值）
+//  * 返 回 值：小车的期望角度（直立环的输入）
+//  */
+//int16_t Velocity(int16_t Motor_Encoder_Left, int16_t Motor_Encoder_Right)
+//{
+//	int16_t PWM_Out, Motor_Encoder_Err, Motor_Encoder_Lowout;
+//	static int16_t Motor_Encoder_S, Motor_EnC_Err_Lowout_last;//Encoder_S积分累积值，需要持续保存，EnC_Err_Lowout_last低通滤波公式要用到
+//	float a = 0.7; //低通滤波系数
+//	
+//	// 1.计算速度偏差
+//	Motor_Encoder_Err = (Motor_Encoder_Left + Motor_Encoder_Right) - 0;//直立时的速度为0，因此期望速度是0
+//	// 2.对速度偏差进行低通滤波
+//	Motor_Encoder_Lowout = (1 - a) * Motor_Encoder_Err + a * Motor_EnC_Err_Lowout_last; // 使得波形更加平滑，滤除高频干扰，放置速度突变
+//    Motor_EnC_Err_Lowout_last = Motor_Encoder_Lowout;   // 防止速度过大影响直立环的正常工作
+//	// 3.对速度偏差积分
+//	Motor_Encoder_S += Motor_Encoder_Lowout;
+//	// 4.积分限幅
+//	Motor_Encoder_S = 
+//			Motor_Encoder_S > 10000 ? 10000:			// 如果值 > 10000，设为10000
+//			(Motor_Encoder_S < (-10000) ? (-10000):		// 如果值 < -10000，设为-10000
+//			Motor_Encoder_S);							// 否则保持原值
+//	 // 5.速度环控制输出
+//	PWM_Out = PID_Parameter.Velocity_Kp * Motor_Encoder_Lowout+PID_Parameter.Velocity_Ki * Motor_Encoder_S;	
+//	
+//	return PWM_Out;
+//}
 
 /**
   * 函    数：直立环PID
-  * 参    数：Car_Median小车的机械中值，pitch倾角，GyroY，Y轴角速度
+  * 参    数：Car_Median小车的机械中值，roll倾角，GyroY，Y轴角速度
   * 返 回 值：电机的PWM输入
   */
-int16_t Vertical(uint16_t Car_Median,float pitch, int16_t GyroY) 
+int16_t Vertical(uint16_t Car_Median,float roll, int16_t GyroY) 
 {
-	int16_t PWM_Out;
-	
-	PWM_Out = -PID_Parameter.Vertical_Kp * (pitch - Car_Median) + PID_Parameter.Vertical_Kd * (GyroY - 0);
+	int16_t PWM_Out = 0;
+	Vertical_Error = roll - Car_Median;
+	PWM_Out = PID_Parameter.Vertical_Kp * Vertical_Error + PID_Parameter.Vertical_Kd * (GyroY - 0);
+//	if (Vertical_Error >= 30 | Vertical_Error <= -30)
+//	{
+//			PWM_Out = PID_Parameter.Vertical_Kp * Vertical_Error + PID_Parameter.Vertical_Kd * (GyroY - 0);
+//	}
+//	else
+//	{
+//			Vertical_Error = 0;
+//			PWM_Out = PID_Parameter.Vertical_Kp * Vertical_Error + PID_Parameter.Vertical_Kd * (GyroY - 0);
+//	}
+//	
 	
 	return PWM_Out;
 }
 
-/**
-  * 函    数：转向环PID
-  * 参    数：Car_Median小车的机械中值，pitch倾角，GyroY，Y轴角速度
-  * 返 回 值：
-  */
-int16_t Turn(int16_t GyroZ)
-{
-	int16_t PWM_Out;
-	
-	PWM_Out = PID_Parameter.Turn_Kp * GyroZ;
-	
-	return PWM_Out;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+///**
+//  * 函    数：转向环PID
+//  * 参    数：Car_Median小车的机械中值，pitch倾角，GyroY，Y轴角速度
+//  * 返 回 值：
+//  */
+//int16_t Turn(int16_t GyroZ)
+//{
+//	int16_t PWM_Out;
+//	
+//	PWM_Out = PID_Parameter.Turn_Kp * GyroZ;
+//	
+//	return PWM_Out;
+//}
 
 
 
@@ -103,42 +96,40 @@ void EXTI9_5_IRQHandler(void)
 {
 	if (EXTI_GetITStatus(EXTI_Line5) == SET)		//判断是否是外部中断5号线触发的中断
 	{
-		int16_t PWM_out, Velocity_out, Vertical_out, Turn_out, Motor_PWM_out_Left, Motor_PWM_out_Right;		//串级PID输出
-		// 1.采集编码器数据&MPU6050角度信息
-       // 电机是相对安装，刚好相差180度，为了编码器输出极性一致，就需要对其中一个取反
-		Motor_Encoder_Left = -Encoder_Get2();						//每隔固定时间段（MPU6050采样间隔设置的是5ms）读取一次编码器计数增量值，这个增量值为脉冲数
+		int16_t PWM_out, Velocity_out, Vertical_out, Turn_out;		//串级PID输出
+//		// 1.采集编码器数据&MPU6050角度信息
+//       // 电机是相对安装，刚好相差180度，为了编码器输出极性一致，就需要对其中一个取反
+		Motor_Encoder_Left =  -Encoder_Get2();						//每隔固定时间段（MPU6050采样间隔设置的是5ms）读取一次编码器计数增量值，这个增量值为脉冲数
 		Motor_Encoder_Right = Encoder_Get4();
 		B = MPU6050_DMP_Get_Data(&pitc,&rol,&ya);
 		MPU6050_Get_a(&AccX, &AccY, &AccZ);							//读取加速度
 		MPU6050_Get_g(&GyroX, &GyroY, &GyroZ);						//读取角速度
 		
 		// 2.利用PID控制器得到控制输出量
-		Velocity_out = Velocity(Motor_Encoder_Left, Motor_Encoder_Right); // 速度环
-		Vertical_out = Vertical(Velocity_out + Car_Median, pitc, GyroY); 
+		//Velocity_out = Velocity(Motor_Encoder_Left, Motor_Encoder_Right); // 速度环
+		Vertical_out = Vertical(Car_Median, rol, GyroY); //直立环
 		// 直立环的输入为Velocity_out + Car_Median，因为直立环的目标角度需要被调整为机械中值加上速度环的输出。
 		//这样，当速度环有输出时，直立环的目标角度会改变，导致小车倾斜，从而产生加速度，达到速度控制的目的。
-		Turn_out = Turn(GyroZ);	
+		//Turn_out = Turn(GyroZ);	转向环
 
 		PWM_out = Vertical_out;//最终输出
 		
 		// 3.把控制输出量加载到电机上，完成最终控制
-		Motor_PWM_out_Left = PWM_out - Turn_out; // 左电机
-		Motor_PWM_out_Right = PWM_out + Turn_out; // 右电机
+		Motor_PWM_out_Left = PWM_out ; // 左电机
+		Motor_PWM_out_Right = PWM_out; // 右电机
 		
+
 		//限幅
+//		Motor_PWM_out_Left = 500;
+//		Motor_PWM_out_Right = 500;
 		PWM_Limit(&Motor_PWM_out_Left,&Motor_PWM_out_Right);
 		
+//		Serial_Printf("pitch:%.2f roll:%.2f yaw:%.2f\r\n", pitc, rol, ya);
+//		Serial_Printf("PMW_L:%d PMW_R:%d\r\n", Motor_PWM_out_Left, Motor_PWM_out_Right);
+		Serial_Printf("%.2f,%.2f,%.2f,%d,%d,%d\r\n", pitc, rol, ya, Vertical_Error, Motor_PWM_out_Left, Motor_PWM_out_Right);
 		//把PWM输入电机
 		Motor_SetSpeed(Motor_PWM_out_Left,Motor_PWM_out_Right);
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		EXTI_ClearITPendingBit(EXTI_Line5);		//清除外部中断14号线的中断标志位
 													//中断标志位必须清除
 													//否则中断将连续不断地触发，导致主程序卡死

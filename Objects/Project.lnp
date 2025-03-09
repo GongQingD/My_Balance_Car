@@ -30,6 +30,7 @@
 ".\objects\exti.o"
 ".\objects\control.o"
 ".\objects\sys_init.o"
+".\objects\serial.o"
 ".\objects\main.o"
 ".\objects\stm32f10x_it.o"
 ".\objects\oled.o"

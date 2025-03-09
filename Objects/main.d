@@ -37,5 +37,7 @@
 .\objects\main.o: .\HardWare\Encoder.h
 .\objects\main.o: .\HardWare\PWM.h
 .\objects\main.o: .\HardWare\Motor.h
+.\objects\main.o: .\System\Serial.h
+.\objects\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\main.o: .\System\Control.h
 .\objects\main.o: .\MPU6050\inv_mpu.h

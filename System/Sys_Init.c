@@ -8,6 +8,7 @@ void MySys_Init(void)
 {
 	OLED_Init();	
 	OLED_Clear();
+	Serial_Init();
 	
 	MPU6050_Init();
 	MPU6050_DMP_Init();
@@ -16,6 +17,8 @@ void MySys_Init(void)
 	Encoder_Init();
 	PWM_Init();
 	Motor_Init();
+	
+	
 	
 	
 }

@@ -37,3 +37,5 @@
 .\objects\sys_init.o: .\HardWare\Encoder.h
 .\objects\sys_init.o: .\HardWare\PWM.h
 .\objects\sys_init.o: .\HardWare\Motor.h
+.\objects\sys_init.o: System\Serial.h
+.\objects\sys_init.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

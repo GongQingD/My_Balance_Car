@@ -10,6 +10,7 @@
 #include "Encoder.h"
 #include "PWM.h"
 #include "Motor.h"
+#include "Serial.h"
 extern int16_t Motor_Encoder_Left, Motor_Encoder_Right, Motor_PWM_out_Left, Motor_PWM_out_Right;
 
 void MySys_Init(void);
