@@ -28,4 +28,14 @@
 .\objects\motor.o: .\Library\stm32f10x_usart.h
 .\objects\motor.o: .\Library\stm32f10x_wwdg.h
 .\objects\motor.o: .\Library\misc.h
-.\objects\motor.o: HardWare\PWM.h
+.\objects\motor.o: .\System\Sys_Init.h
+.\objects\motor.o: .\Mylibrary\OLED.h
+.\objects\motor.o: .\MPU6050\MPU6050.h
+.\objects\motor.o: .\MPU6050\inv_mpu.h
+.\objects\motor.o: .\System\exti.h
+.\objects\motor.o: .\System\Delay.h
+.\objects\motor.o: .\HardWare\Encoder.h
+.\objects\motor.o: .\HardWare\PWM.h
+.\objects\motor.o: .\HardWare\Motor.h
+.\objects\motor.o: .\System\Serial.h
+.\objects\motor.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

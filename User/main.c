@@ -22,6 +22,6 @@ int main(void)
 		
 		OLED_ShowNum(1,8,sum_test,4);
 		OLED_ShowSignedNum(2,8,Motor_Encoder_Left,5);
-		OLED_ShowSignedNum(3,8,Motor_Encoder_Right,5);
+  	OLED_ShowSignedNum(3,8,Motor_Encoder_Right,5);
 	}
 }

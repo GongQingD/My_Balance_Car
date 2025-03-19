@@ -1,6 +1,5 @@
 #include "stm32f10x.h"                  // Device header
-#include "PWM.h"
-
+#include "Sys_Init.h"
 /**
   * 函    数：直流电机初始化
   * 参    数：无
@@ -17,8 +16,6 @@ void Motor_Init(void)
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_Init(GPIOB, &GPIO_InitStructure);						//将PA4和PA5引脚初始化为推挽输出	
-	
-	PWM_Init();													//初始化直流电机的底层PWM，即PWMA，PWMB接口
 }
 
 /**

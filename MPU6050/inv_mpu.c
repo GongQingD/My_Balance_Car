@@ -868,7 +868,7 @@ int mpu_init(void)
         return -1;
     if (mpu_set_lpf(42))
         return -1;
-    if (mpu_set_sample_rate(200))
+    if (mpu_set_sample_rate(50))
         return -1;
     if (mpu_configure_fifo(0))
         return -1;

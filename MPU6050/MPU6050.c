@@ -129,7 +129,7 @@ u8 MPU6050_Init(void)
 //	{
 	MPU6050_WriteReg(MPU_PWR_MGMT1_REG,0X02);	//设置CLKSEL,PLL X轴为参考
 	MPU6050_WriteReg(MPU_PWR_MGMT2_REG,0X00);	//加速度与陀螺仪都工作
-	MPU_Set_Rate(200);						//设置采样率为50Hz
+	MPU_Set_Rate(100);						//设置采样率为50Hz
 // 	}else return 1;
 	return 0;
 }

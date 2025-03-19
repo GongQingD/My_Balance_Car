@@ -803,7 +803,7 @@
             <File>
               <FileName>Motor.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Motor.h</FilePath>
+              <FilePath>.\HardWare\Motor.h</FilePath>
             </File>
           </Files>
         </Group>
